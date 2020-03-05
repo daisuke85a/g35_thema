@@ -1,0 +1,711 @@
+/*
+Theme Name: gokigen
+Author: gokigen
+Author URI: https://gokigen-ch.com/
+Description: 
+*/
+/* ====================================================================
+  html5doctor.com Reset Stylesheet
+  v1.6.1
+  Last Updated: 2010-09-17
+  Author: Richard Clark - http://richclarkdesign.com
+  Twitter: @rich_clark
+==================================================================== */
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+
+body {
+  line-height: 1;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+nav ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+a {
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+hr {
+  display: block;
+  height: 1px;
+  margin: 1em 0;
+  padding: 0;
+  border: 0;
+  border-top: 1px solid #ccc;
+}
+
+input, select {
+  vertical-align: middle;
+}
+
+/*  base
+-------------------------------------------------------------------- */
+body {
+  background: #fff;
+  color: #191919;
+  font-size: 16px;
+  font-family: "Noto Sans JP", sans-serif;
+	font-weight: normal;
+	line-height: 1;
+	letter-spacing: 0.05em;
+  word-break: break-all;
+}
+@media screen and (max-width: 768px) {
+  body {
+    font-size: 14.4px;
+  }
+}
+@media screen and (max-width: 480px) {
+  body {
+    font-size: 12.8px;
+  }
+}
+
+button,
+input[type="text"],
+input[type="password"],
+input[type="radio"],
+input[type="checkbox"],
+input[type="file"],
+input[type="reset"],
+input[type="submit"],
+input[type="button"],
+input[type="image"],
+input[type="hidden"] {
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+  color: inherit;
+  font-size: inherit;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+button:hover {
+	cursor: pointer;
+}
+
+a {
+  color: #191919;
+  -webkit-transition: all 0.3s;
+	transition: all 0.3s;
+	text-decoration: none;
+}
+
+a:hover, a:focus, a:active {
+  outline: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.pc {
+  display: block;
+}
+@media screen and (max-width: 768px) {
+  .pc {
+    display: none;
+  }
+}
+
+.sp {
+  display: none;
+}
+@media screen and (max-width: 768px) {
+  .sp {
+    display: block;
+  }
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+
+/*
+  layout
+--------------------------------------------------------------*/
+main {
+	min-height: 100vh;
+}
+
+.wrap {
+	max-width: 960px;
+	margin: 0 auto;
+}
+
+.container {
+	padding-top: 4em;
+}
+
+/*
+  header
+--------------------------------------------------------------*/
+.header {
+}
+.header-nav {
+	position: relative;
+	padding-right: 1em;
+	padding-left: 1em;
+	border-bottom: 2px solid #191919;
+	background: #C19445;
+}
+.header-inner {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 60px;
+}
+.header-nav-logo-area {
+	display: flex;
+	align-items: center;
+}
+.header-nav-title {
+	font-size: 36px;
+	margin-right: 10px;
+}
+.header-nav-description {
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.header-nav-menu input {
+  display: none;
+}
+.header-nav-menu-list {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 0;
+	background: linear-gradient(45deg, rgba(193, 40, 46, 0.9), rgba(193, 148, 69, 0.9));
+	font-family: 'Lexend Deca', "Noto Sans JP", sans-serif;
+	text-align: center;
+	z-index: 1;
+	transition: height 500ms;
+}
+.header-nav-menu-list .menu {
+	display: none;
+}
+.header-nav-menu-list a {
+	display: block;
+	padding: 1em;
+	color: #fff;
+	font-size: 1.5em;
+}
+.header-nav-menu label {
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 60px;
+	height: 60px;
+	background: url(images/ico-menu@2x.png) no-repeat center;
+	background-size: 20px;
+	cursor: pointer;
+	z-index: 2;
+}
+.header-nav-menu input:checked + label {
+	position: fixed;
+}
+.header-nav-menu input:checked + label + .header-nav-menu-list {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+
+.header-nav-menu input:checked + label + .header-nav-menu-list .menu {
+	display: block;
+}
+
+.header-mv {
+	height: 500px;
+	background: #C19445;
+	overflow: hidden;
+}
+.header-mv img {
+	width: 100%;
+	height: 500px;
+	object-fit: cover;
+	opacity: 0.9;
+}
+
+
+/*
+  sidebar
+--------------------------------------------------------------*/
+.container {
+	display: flex;
+	justify-content: space-between;
+}
+.container main {
+	flex: 1;
+}
+.container aside {
+	width: 340px;
+	padding-top: 1em;
+	padding-left: 40px;
+}
+.container aside p {
+	margin-top: 1em;
+}
+
+
+
+/*
+  pick-up
+--------------------------------------------------------------*/
+.pick-up {
+padding-top: 4em;
+padding-bottom: 8em;
+padding-right: 1em;
+padding-left: 1em;
+text-align: center;
+}
+
+.pick-up__title img {
+	margin: 0 auto;
+}
+.pick-up__title-sub {
+	margin-top: 1em;
+	line-height: 1.5em;
+}
+
+.pick-up-list {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	margin-top: 2.5em;
+	text-align: left;
+}
+.pick-up-list li {
+	width: 48%;
+	padding: 1em 0;
+	border-bottom: 1px solid #CCBEA5;
+}
+.pick-up-list li a {
+	display: flex;
+}
+.pick-up-list li img {
+	width: 120px;
+	height: 120px;
+	margin-right: 1em;
+	object-fit: cover;
+}
+.pick-up-list__interviewee-title {
+	font-weight: bold;
+	line-height: 1.5;
+}
+.pick-up-list__interviewee-name {
+	font-size: 1.5em;
+	font-weight: bold;
+	line-height: 1.5;
+}
+.pick-up-list__interviewee-name::after {
+	font-size: 1rem;
+  content: 'さん';
+}
+.pick-up-list__title {
+	margin-top: 0.5em;
+	font-weight: normal;
+	line-height: 1.5;
+}
+.pick-up__button {
+	position: relative;
+	display: block;
+	width: 240px;
+	margin: 0 auto;
+	margin-top: 4em;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+	background: #C19445;
+}
+.pick-up__button::after {
+	position: absolute;
+	top: 50%;
+	right: 10px;
+	display: block;
+	width: 8px;
+	height: 8px;
+	margin-top: -5.5px;
+	border-top: 1px solid #191919;
+	border-right: 1px solid #191919;
+	transform: rotate(45deg);
+	content: "";
+}
+
+/*
+  movie
+--------------------------------------------------------------*/
+.movie {
+	position: relative;
+	background: #C14545;
+	padding-top: 4em;
+	padding-bottom: 4em;
+	padding-right: 1em;
+	padding-left: 1em;
+}
+.movie::before {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: block;
+	width: 100%;
+	height: 100px;
+	background: #C14545;
+  transform: skewY(-2deg);
+  transform-origin: bottom left;
+	z-index: -1;
+	content: "";
+}
+
+.movie::after {
+	position: absolute;
+  bottom: 0;
+	left: 0;
+	display: block;
+	width: 100%;
+	height: 100px;
+	background: #C14545;
+  transform: skewY(2deg);
+  transform-origin: bottom left;
+	z-index: -1;
+	content: "";
+}
+.movie-inner {
+	text-align: center;
+}
+.movie__title img {
+	margin: 0 auto;
+}
+.movie-area {
+	margin-top: 4em;
+}
+.movie-area iframe {
+width: 100%;
+height: 540px;
+
+}
+.movie__button {
+	position: relative;
+	display: block;
+	width: 240px;
+	margin: 0 auto;
+	margin-top: 4em;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+	background: #fff;
+}
+.movie__button::after {
+	position: absolute;
+	top: 50%;
+	right: 10px;
+	display: block;
+	width: 8px;
+	height: 8px;
+	margin-top: -5.5px;
+	border-top: 1px solid #191919;
+	border-right: 1px solid #191919;
+	transform: rotate(45deg);
+	content: "";
+}
+
+/*
+  column
+--------------------------------------------------------------*/
+.column {
+	padding-top: 120px;
+	padding-bottom: 100px;
+	padding-right: 1em;
+	padding-left: 1em;
+	text-align: center;
+	}
+
+.column__title img {
+	margin: 0 auto;
+}
+.column__title-sub {
+	margin-top: 1em;
+	line-height: 1.5em;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	text-align: left;
+}
+.column-list > li {
+	position: relative;
+	width: 48%;
+	margin-top: 4em;
+}
+
+.column-list > li img {
+	width: 100%;
+	height: 270px; /*61%*/
+	object-fit: cover;
+}
+.column-list__time {
+	margin-top: 1em;
+	color: #666;
+	font-size: 12px;
+	font-weight: bold;
+}
+.column-list__title {
+	margin-top: 0.5em;
+	line-height: 1.5;
+}
+.column-list__tag {
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: 0.5em;
+}
+.column-list__tag > li {
+	padding-right: 0.5em;
+}
+.column-list__tag > li a {
+	color: #C19445;
+	text-decoration: underline;
+	line-height: 1.5;
+}
+.column-list__tag > li a::before {
+	content: '#';
+}
+
+.column__button {
+	position: relative;
+	display: block;
+	width: 240px;
+	margin: 0 auto;
+	margin-top: 60px;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	background: #C19445;
+}
+.column__button::after {
+	position: absolute;
+	top: 50%;
+	right: 10px;
+	display: block;
+	width: 8px;
+	height: 8px;
+	margin-top: -5.5px;
+	border-top: 1px solid #191919;
+	border-right: 1px solid #191919;
+	transform: rotate(45deg);
+	content: "";
+}
+.column .post-categories {
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 0.5em 1em;
+	background: #EAEAEA;
+	font-size: 12px;
+	font-weight: bold;
+}
+.column .post-categories li {
+	display: inline-block;
+}
+.column .post-categories li:not(:last-child)::after {
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+	content: '/';
+}
+
+
+/*
+  questionnaire
+--------------------------------------------------------------*/
+.questionnaire {
+	position: relative;
+	padding-top: 4em;
+	background: #E5DED2;
+}
+.questionnaire::before {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: block;
+	width: 100%;
+	height: 100px;
+	background: #E5DED2;
+  transform: skewY(-2deg);
+  transform-origin: bottom left;
+	z-index: -1;
+	content: "";
+}
+.questionnaire::after {
+	position: absolute;
+  bottom: 0;
+	left: 0;
+	display: block;
+	width: 100%;
+	height: 100px;
+	background: #E5DED2;
+  transform: skewY(2deg);
+  transform-origin: bottom left;
+	z-index: -1;
+	content: "";
+}
+.questionnaire-title {
+	text-align: center;
+	font-size: 1.5em;
+	font-weight: normal;
+	line-height: 1.5em;
+}
+.questionnaire-form {
+	padding-top: 4em;
+	padding-bottom: 4em;
+}
+
+
+/*
+  recommended
+--------------------------------------------------------------*/
+.recommended {
+	padding-top: 4em;
+	padding-bottom: 4em;
+
+}
+.recommended-title {
+	text-align: center;
+	font-size: 1.5em;
+	font-weight: normal;
+	line-height: 1.5em;
+}
+
+/*
+  category
+--------------------------------------------------------------*/
+.category__title {
+	margin-top: 4em;
+	text-align: center;
+}
+.category-inner {
+	padding-bottom: 8em;
+	text-align: center;
+}
+.category-list {
+	text-align: left;
+}
+.category-list li {
+	width: 100%;
+	padding: 1em 0;
+	border-bottom: 1px solid #CCBEA5;
+}
+.category-list li a {
+	display: flex;
+}
+.category-list li img {
+	width: 120px;
+	height: 120px;
+	margin-right: 1em;
+	object-fit: cover;
+}
+.category-list__interviewee-title {
+	font-weight: bold;
+	line-height: 1.5;
+}
+.category-list__interviewee-name {
+	font-size: 1.5em;
+	font-weight: bold;
+	line-height: 1.5;
+}
+.category-list__interviewee-name::after {
+	font-size: 1rem;
+  content: 'さん';
+}
+.category-list__title {
+	margin-top: 0.5em;
+	font-weight: normal;
+	line-height: 1.5;
+}
+
+/*
+  single
+--------------------------------------------------------------*/
+.entry-content {
+	margin-top: 1em;
+}
+
+
+
+/*
+  footer
+--------------------------------------------------------------*/
+.footer {
+	padding: 1em 0;
+	background: #C19445;
+	font-size: 13px;
+	text-align: center;
+}
+.footer .copyright {
+	margin-top: 1em;
+	font-size: 10px;
+}
+.footer .menu ul {
+	display: flex;
+	justify-content: center;
+}
+.footer .menu ul li:not(:last-child) {
+  padding-right: 1em;
+}
