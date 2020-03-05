@@ -14,6 +14,13 @@ get_header();?>
 					'post_type' => 'agent',    //投稿タイプの指定
 					'orderby' => $_GET['orderby'],
 					'order'   => $_GET['order'],
+					'meta_query' => [
+						[
+							'key'     => $_GET['key'],
+							'value'   => $_GET['value'],
+							'compare' => '=',  // "=" はデフォルトなので省略可
+						],
+					]
 				));
 			?>
 			<p>------------------------------------------------------------------------------</p>
