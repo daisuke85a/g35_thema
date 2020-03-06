@@ -8,6 +8,30 @@ get_header();?>
 	<section id="agent" class="agent">
 		<h2 class="agent__title-sub">エージェント比較ページ</h2>
 		<?php
+			echo($_GET['income']);
+
+			$meta_query = [];
+			switch($_GET['income']){
+				case 'none':
+					break;
+				case 'under':
+					$meta_query[] = [
+						'key'=> 'yearly_income_upper',
+						'value'=> '600',
+						'compare' => '<'
+					];
+					break;
+				case 'over':
+					$meta_query[] = [
+						'key'=> 'yearly_income_upper',
+						'value'=> '600',
+						'compare' => '>='
+					];
+					break;
+				default:
+					break;
+			}
+
 			// URLで絞り込み条件を複数指定できる
 			// 全ての条件を満たすエージェントを抽出する（AND条件）
 			// key[]：カスタムフィールド名(age,ratingなど)
@@ -15,7 +39,6 @@ get_header();?>
 			// compare[]：比較演算子。(=,<,<=など。省略化。省略すると=になる)
 			// 例 (20代) : http://localhost:8800/wordpress/agent-hikaku/?key[]=age&value[]=20
 			// 例 (20代以上) : 20代以上　かつ　レートが2以上http://localhost:8800/wordpress/agent-hikaku/?key[]=age&value[]=20&compare[]=%3E=&key[]=rating&value[]=2&compare[]=%3E=
-			$meta_query = [];
 			for($i=0;$i<count($_GET['key']);$i++){
 				$meta_query[] = [
 					'key'=> $_GET['key'][$i],
@@ -48,6 +71,16 @@ get_header();?>
 			<?php else: ?>
 				<p>絞り込みなし</p>
 			<?php endif; ?>
+			<h3>絞り込み条件の入力</h3>
+			<form action="" method="GET">
+				<p>現在の年収を教えてください</p>
+				<p>
+					<input type="radio" name="income" value="none" checked="checked" style="-webkit-appearance: radio">指定なし
+					<input type="radio" name="income" value="under" style="-webkit-appearance: radio">600万円未満
+					<input type="radio" name="income" value="over" style="-webkit-appearance: radio">600万円以上
+				</p>
+				<input type="submit" value="絞り込み" style="-webkit-appearance: button;border: black 1px solid;">
+			</form>
 		</div>
 
 		<div class="agent-list" style="border: black 1px solid; margin: 30px auto;">
