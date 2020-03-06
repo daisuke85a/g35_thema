@@ -85,21 +85,6 @@ function getMetaQuery(){
 		<?php
 			$meta_query = [];
 			$meta_query = getMetaQuery();
-
-			// URLで絞り込み条件を複数指定できる
-			// 全ての条件を満たすエージェントを抽出する（AND条件）
-			// key[]：カスタムフィールド名(age,ratingなど)
-			// value[]：カスタムフィールド名(20,3など)
-			// compare[]：比較演算子。(=,<,<=など。省略化。省略すると=になる)
-			// 例 (20代) : http://localhost:8800/wordpress/agent-hikaku/?key[]=age&value[]=20
-			// 例 (20代以上) : 20代以上　かつ　レートが2以上http://localhost:8800/wordpress/agent-hikaku/?key[]=age&value[]=20&compare[]=%3E=&key[]=rating&value[]=2&compare[]=%3E=
-			for($i=0;$i<count($_GET['key']);$i++){
-				$meta_query[] = [
-					'key'=> $_GET['key'][$i],
-					'value'=> $_GET['value'][$i],
-					'compare' => $_GET['compare'][$i] === null ? '=' : $_GET['compare'][$i]
-				];
-			}
 			$posts = get_posts(array(
 				'posts_per_page' => 4,
 				'post_type' => 'agent',
@@ -110,22 +95,23 @@ function getMetaQuery(){
 		?>
 
 		<div class="agent-search-cconditions-view" style="border: black 1px solid; margin: 30px auto;">
-
-			<h3>現在の絞り込み条件</h3>
 			<!-- デバッグ用(普段は絶対falseにしてる)-->
-			<?php if($meta_query != [] && false) :?>
-				<p>次の条件をすべて満たすエージェントを表示</p>
-				<ul class="agent-list">
-					<li>
-					<?php foreach($meta_query as $item): ?>
-						<p>絞り込みキー: <?php echo($item['key']); ?></p>
-						<p>絞り込みの値: <?php echo($item['value']); ?> </p>
-						<p>絞り込みの比較: <?php echo($item['compare']); ?> </p>
-					<?php endforeach; ?>
-					</li>
-				</ul>
-			<?php else: ?>
-				<p>絞り込みなし</p>
+			<?php if(false) :?>
+				<h3>現在の絞り込み条件</h3>
+				<?php if($meta_query != []) :?>
+					<p>次の条件をすべて満たすエージェントを表示</p>
+					<ul class="agent-list">
+						<li>
+						<?php foreach($meta_query as $item): ?>
+							<p>絞り込みキー: <?php echo($item['key']); ?></p>
+							<p>絞り込みの値: <?php echo($item['value']); ?> </p>
+							<p>絞り込みの比較: <?php echo($item['compare']); ?> </p>
+						<?php endforeach; ?>
+						</li>
+					</ul>
+				<?php else: ?>
+					<p>絞り込みなし</p>
+				<?php endif; ?>
 			<?php endif; ?>
 			<!-- デバッグ用(普段は絶対falseにしてる)-->
 			<h3>絞り込み条件の入力</h3>
