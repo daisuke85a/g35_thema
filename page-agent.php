@@ -4,6 +4,37 @@
  */
 get_header();?>
 
+<?php
+function getMetaQuery(){
+	$meta_query = [];
+
+	// 年収の絞り込み
+	switch($_GET['income']){
+		case 'none':
+			break;
+		case 'under':
+			$meta_query[] = [
+				'key'=> 'yearly_income_upper',
+				'value'=> '600',
+				'compare' => '<'
+			];
+			break;
+		case 'over':
+			$meta_query[] = [
+				'key'=> 'yearly_income_upper',
+				'value'=> '600',
+				'compare' => '>='
+			];
+			break;
+		default:
+			break;
+	}
+
+	
+	return $meta_query;
+}
+?>
+
 <main>
 	<section id="agent" class="agent">
 		<h2 class="agent__title-sub">エージェント比較ページ</h2>
@@ -11,26 +42,7 @@ get_header();?>
 			echo($_GET['income']);
 
 			$meta_query = [];
-			switch($_GET['income']){
-				case 'none':
-					break;
-				case 'under':
-					$meta_query[] = [
-						'key'=> 'yearly_income_upper',
-						'value'=> '600',
-						'compare' => '<'
-					];
-					break;
-				case 'over':
-					$meta_query[] = [
-						'key'=> 'yearly_income_upper',
-						'value'=> '600',
-						'compare' => '>='
-					];
-					break;
-				default:
-					break;
-			}
+			$meta_query = getMetaQuery();
 
 			// URLで絞り込み条件を複数指定できる
 			// 全ての条件を満たすエージェントを抽出する（AND条件）
