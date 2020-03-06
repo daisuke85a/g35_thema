@@ -85,16 +85,17 @@ function getMetaQuery(){
 		<?php
 			$meta_query = [];
 			$meta_query = getMetaQuery();
-			$posts = get_posts(array(
+			$posts = get_posts([
 				'posts_per_page' => 4,
 				'post_type' => 'agent',
-				'orderby' => $_GET['orderby'],
-				'order'   => $_GET['order'],
+				'orderby' => 'meta_value',
+				'meta_key' => $_GET['orderby'],
+				'order'   => 'DESC',
 				'meta_query' => $meta_query
-			));
+			]);
 		?>
 
-		<div class="agent-search-cconditions-view" style="border: black 1px solid; margin: 30px auto;">
+		<div class="agent-search-cconditions" style="border: black 1px solid; margin: 30px auto;">
 			<!-- デバッグ用(普段は絶対falseにしてる)-->
 			<?php if(false) :?>
 				<h3>現在の絞り込み条件</h3>
@@ -114,7 +115,7 @@ function getMetaQuery(){
 				<?php endif; ?>
 			<?php endif; ?>
 			<!-- デバッグ用(普段は絶対falseにしてる)-->
-			<h3>絞り込み条件の入力</h3>
+			<h3>絞り込み条件</h3>
 			<form action="" method="GET">
 				<p>現在の年収を教えてください</p>
 				<p>
@@ -148,6 +149,12 @@ function getMetaQuery(){
 					<label for="foreign_capital">外資企業への転職実績◎</label>
 				</p>
 
+				<p>ソート順</p>
+				<p>
+					<input type="radio" name="orderby" value="rating" <?php if($_GET['orderby'] === "rating" || $_GET['sort'] === null) echo("checked") ?> style="-webkit-appearance: radio">評価順
+					<input type="radio" name="orderby" value="num_publications" <?php if($_GET['orderby'] === "num_publications") echo("checked") ?> style="-webkit-appearance: radio">掲載数順
+				</p>
+
 				<input type="submit" value="絞り込み" style="-webkit-appearance: button;border: black 1px solid;">
 			</form>
 		</div>
@@ -163,6 +170,9 @@ function getMetaQuery(){
 					<?php if(get_post_meta($post->ID, 'rating',true)): ?>
 						<p class="agent-list__rating">評価：<?php echo get_post_meta($post->ID , 'rating' ,true); ?></p>
 						<p><?php for($i=0;$i<get_post_meta($post->ID , 'rating' ,true);$i++) echo '★'; ?></p>
+					<?php endif; ?>
+					<?php if(get_post_meta($post->ID, 'num_publications',true)): ?>
+						<p class="agent-list__num_publications">掲載数：<?php echo get_post_meta($post->ID , 'num_publications' ,true); ?></p>
 					<?php endif; ?>
 					<?php if(get_post_meta($post->ID, 'yearly_income_upper',true)): ?>
 						<p class="agent-list__yearly_income_upper">年収：<?php echo get_post_meta($post->ID , 'yearly_income_upper' ,true); ?></p>
