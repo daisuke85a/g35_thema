@@ -30,7 +30,43 @@ function getMetaQuery(){
 			break;
 	}
 
-	
+
+	// 年齢の絞り込み
+	switch($_GET['age']){
+		case 'none':
+			break;
+		case '20':
+			$meta_query[] = [
+				'key'=> 'age',
+				'value'=> '20',
+				'compare' => '>='
+			];
+			break;
+		case '30':
+			$meta_query[] = [
+				'key'=> 'age',
+				'value'=> '30',
+				'compare' => '>='
+			];
+			break;
+		case '40':
+			$meta_query[] = [
+				'key'=> 'age',
+				'value'=> '40',
+				'compare' => '>='
+			];
+			break;
+		case '50':
+			$meta_query[] = [
+				'key'=> 'age',
+				'value'=> '50',
+				'compare' => '>='
+			];
+			break;
+		default:
+			break;
+	}
+
 	return $meta_query;
 }
 ?>
@@ -39,8 +75,6 @@ function getMetaQuery(){
 	<section id="agent" class="agent">
 		<h2 class="agent__title-sub">エージェント比較ページ</h2>
 		<?php
-			echo($_GET['income']);
-
 			$meta_query = [];
 			$meta_query = getMetaQuery();
 
@@ -90,6 +124,14 @@ function getMetaQuery(){
 					<input type="radio" name="income" value="none" checked="checked" style="-webkit-appearance: radio">指定なし
 					<input type="radio" name="income" value="under" style="-webkit-appearance: radio">600万円未満
 					<input type="radio" name="income" value="over" style="-webkit-appearance: radio">600万円以上
+				</p>
+				<p>年齢を教えて下さい</p>
+				<p>
+					<input type="radio" name="age" value="none" checked="checked" style="-webkit-appearance: radio">指定なし
+					<input type="radio" name="age" value="20" style="-webkit-appearance: radio">20代
+					<input type="radio" name="age" value="30" style="-webkit-appearance: radio">30代
+					<input type="radio" name="age" value="40" style="-webkit-appearance: radio">40代
+					<input type="radio" name="age" value="50" style="-webkit-appearance: radio">50代以上
 				</p>
 				<input type="submit" value="絞り込み" style="-webkit-appearance: button;border: black 1px solid;">
 			</form>
