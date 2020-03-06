@@ -32,36 +32,46 @@ get_header();?>
 			));
 		?>
 
-		<h3>絞り込み条件</h3>
-		<?php if($meta_query != []) :?>
-			<p>次の条件をすべて満たすエージェントを表示</p>
+		<div class="agent-search-cconditions-view" style="border: black 1px solid; margin: 30px auto;">
+			<h3>現在の絞り込み条件</h3>
+			<?php if($meta_query != []) :?>
+				<p>次の条件をすべて満たすエージェントを表示</p>
+				<ul class="agent-list">
+					<li>
+					<?php foreach($meta_query as $item): ?>
+						<p>絞り込みキー: <?php echo($item['key']); ?></p>
+						<p>絞り込みの値: <?php echo($item['value']); ?> </p>
+						<p>絞り込みの比較: <?php echo($item['compare']); ?> </p>
+					<?php endforeach; ?>
+					</li>
+				</ul>
+			<?php else: ?>
+				<p>絞り込みなし</p>
+			<?php endif; ?>
+		</div>
+
+		<div class="agent-list" style="border: black 1px solid; margin: 30px auto;">
+			<h2>エージェント一覧</h2>
 			<ul class="agent-list">
-				<li>
-				<?php foreach($meta_query as $item): ?>
-					<p>絞り込みキー: <?php echo($item['key']); ?></p>
-					<p>絞り込みの値: <?php echo($item['value']); ?> </p>
-					<p>絞り込みの比較: <?php echo($item['compare']); ?> </p>
-				<?php endforeach; ?>
+				<?php if($posts): foreach($posts as $post): setup_postdata($post); ?>
+				<li style="margin: 10px auto;">
+					<?php if(get_post_meta($post->ID, 'agent',true)): ?>
+						<p class="agent-list__agent">エージェント名：<?php echo get_post_meta($post->ID , 'agent' ,true); ?></p>
+					<?php endif; ?>
+					<?php if(get_post_meta($post->ID, 'rating',true)): ?>
+						<p class="agent-list__rating">評価：<?php echo get_post_meta($post->ID , 'rating' ,true); ?></p>
+						<p><?php for($i=0;$i<get_post_meta($post->ID , 'rating' ,true);$i++) echo '★'; ?></p>
+					<?php endif; ?>
+					<?php if(get_post_meta($post->ID, 'yearly_income_upper',true)): ?>
+						<p class="agent-list__yearly_income_upper">年収：<?php echo get_post_meta($post->ID , 'yearly_income_upper' ,true); ?></p>
+					<?php endif; ?>
+					<?php if(get_post_meta($post->ID, 'age',true)): ?>
+						<p class="agent-list__age">年齢：<?php echo get_post_meta($post->ID , 'age' ,true); ?></p>
+					<?php endif; ?>
 				</li>
+				<?php endforeach; endif; ?>
 			</ul>
-		<?php else: ?>
-			<p>絞り込みなし</p>
-		<?php endif; ?>
-	
-		<h2>エージェント一覧</h2>
-		<ul class="agent-list">
-			<?php if($posts): foreach($posts as $post): setup_postdata($post); ?>
-			<li>
-				<?php if(get_post_meta($post->ID, 'agent',true)): ?>
-					<p class="agent-list__agent">エージェント名：<?php echo get_post_meta($post->ID , 'agent' ,true); ?></p>
-				<?php endif; ?>
-				<?php if(get_post_meta($post->ID, 'rating',true)): ?>
-					<p class="agent-list__rating">評価：<?php echo get_post_meta($post->ID , 'rating' ,true); ?></p>
-					<p><?php for($i=0;$i<get_post_meta($post->ID , 'rating' ,true);$i++) echo '★'; ?></p>
-				<?php endif; ?>
-			</li>
-			<?php endforeach; endif; ?>
-		</ul>
+		</div>
 	</section>
 </main>
 
