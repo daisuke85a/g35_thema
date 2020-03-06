@@ -77,6 +77,21 @@ function getMetaQuery(){
 
 	return $meta_query;
 }
+
+function getKodawariLabel($name){
+	
+	$ret = [
+		'support' => '転職サポートが充実',
+		'woman' => '女性の転職に強い',
+		'freeter' => 'フリーターの転職実績◎',
+		'career_up' => 'キャリアアップに強い',
+		'second_graduates' => '第二新卒向け',
+		'it_web' => 'IT/WEB業界に強い',
+		'foreign_capital' => '外資企業への転職実績◎',
+	];
+	return $ret[$name];
+}
+
 ?>
 
 <main>
@@ -181,7 +196,7 @@ function getMetaQuery(){
 						<p class="agent-list__age">年齢：<?php echo get_post_meta($post->ID , 'age' ,true); ?></p>
 					<?php endif; ?>
 					<?php if(get_post_meta($post->ID, 'kodawari',true)): ?>
-						<p class="agent-list__kodawari">こだわり条件：<?php foreach(get_post_meta($post->ID , 'kodawari' ,true) as $kodawari) echo $kodawari . '/'; ?></p>
+						<p class="agent-list__kodawari">こだわり条件：<?php foreach(get_post_meta($post->ID , 'kodawari' ,true) as $kodawari) echo getKodawariLabel($kodawari) . ' / '; ?></p>
 					<?php endif; ?>
 				</li>
 				<?php endforeach; endif; ?>
