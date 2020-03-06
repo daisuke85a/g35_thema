@@ -110,8 +110,10 @@ function getMetaQuery(){
 		?>
 
 		<div class="agent-search-cconditions-view" style="border: black 1px solid; margin: 30px auto;">
+
 			<h3>現在の絞り込み条件</h3>
-			<?php if($meta_query != []) :?>
+			<!-- デバッグ用(普段は絶対falseにしてる)-->
+			<?php if($meta_query != [] && false) :?>
 				<p>次の条件をすべて満たすエージェントを表示</p>
 				<ul class="agent-list">
 					<li>
@@ -125,37 +127,38 @@ function getMetaQuery(){
 			<?php else: ?>
 				<p>絞り込みなし</p>
 			<?php endif; ?>
+			<!-- デバッグ用(普段は絶対falseにしてる)-->
 			<h3>絞り込み条件の入力</h3>
 			<form action="" method="GET">
 				<p>現在の年収を教えてください</p>
 				<p>
-					<input type="radio" name="income" value="none" checked="checked" style="-webkit-appearance: radio">指定なし
-					<input type="radio" name="income" value="under" style="-webkit-appearance: radio">600万円未満
-					<input type="radio" name="income" value="over" style="-webkit-appearance: radio">600万円以上
+					<input type="radio" name="income" value="none" <?php if($_GET['income'] === "none" || $_GET['income'] === null) echo("checked") ?> style="-webkit-appearance: radio">指定なし
+					<input type="radio" name="income" value="under" <?php if($_GET['income'] === "under") echo("checked") ?> style="-webkit-appearance: radio">600万円未満
+					<input type="radio" name="income" value="over" <?php if($_GET['income'] === "over") echo("checked") ?> style="-webkit-appearance: radio">600万円以上
 				</p>
 				<p>年齢を教えて下さい</p>
 				<p>
-					<input type="radio" name="age" value="none" checked="checked" style="-webkit-appearance: radio">指定なし
-					<input type="radio" name="age" value="20" style="-webkit-appearance: radio">20代
-					<input type="radio" name="age" value="30" style="-webkit-appearance: radio">30代
-					<input type="radio" name="age" value="40" style="-webkit-appearance: radio">40代
-					<input type="radio" name="age" value="50" style="-webkit-appearance: radio">50代以上
+					<input type="radio" name="age" value="none" <?php if($_GET['age'] === "none" || $_GET['age'] === null) echo("checked") ?> checked="checked" style="-webkit-appearance: radio">指定なし
+					<input type="radio" name="age" value="20" <?php if($_GET['age'] === "20") echo("checked") ?> style="-webkit-appearance: radio">20代
+					<input type="radio" name="age" value="30" <?php if($_GET['age'] === "30") echo("checked") ?> style="-webkit-appearance: radio">30代
+					<input type="radio" name="age" value="40" <?php if($_GET['age'] === "40") echo("checked") ?>  style="-webkit-appearance: radio">40代
+					<input type="radio" name="age" value="50" <?php if($_GET['age'] === "50") echo("checked") ?>  style="-webkit-appearance: radio">50代以上
 				</p>
 				<p>こだわり条件を教えて下さい</p>
 				<p>
-					<input type="checkbox" name="kodawari[]" id="support" value="support" checked="checked" style="-webkit-appearance: radio">
+					<input type="checkbox" name="kodawari[]" id="support" value="support" <?php if(in_array("support", $_GET['kodawari'])) echo("checked") ?> style="-webkit-appearance: radio">
 					<label for="support">転職サポートが充実</label>
-					<input type="checkbox" name="kodawari[]" value="woman" style="-webkit-appearance: radio">
+					<input type="checkbox" name="kodawari[]" value="woman" <?php if(in_array("woman", $_GET['kodawari'])) echo("checked") ?> style="-webkit-appearance: radio">
 					<label for="woman">女性の転職に強い</label>
-					<input type="checkbox" name="kodawari[]" value="freeter" style="-webkit-appearance: radio">
+					<input type="checkbox" name="kodawari[]" value="freeter" <?php if(in_array("freeter", $_GET['kodawari'])) echo("checked") ?> style="-webkit-appearance: radio">
 					<label for="freeter">フリーターの転職実績◎</label>
-					<input type="checkbox" name="kodawari[]" value="career_up" style="-webkit-appearance: radio">
+					<input type="checkbox" name="kodawari[]" value="career_up" <?php if(in_array("career_up", $_GET['kodawari'])) echo("checked") ?> style="-webkit-appearance: radio">
 					<label for="career_up">キャリアアップに強い</label>
-					<input type="checkbox" name="kodawari[]" value="second_graduates" style="-webkit-appearance: radio">
+					<input type="checkbox" name="kodawari[]" value="second_graduates" <?php if(in_array("second_graduates", $_GET['kodawari'])) echo("checked") ?> style="-webkit-appearance: radio">
 					<label for="second_graduates">第二新卒向け</label>
-					<input type="checkbox" name="kodawari[]" value="it_web" style="-webkit-appearance: radio">
+					<input type="checkbox" name="kodawari[]" value="it_web" <?php if(in_array("it_web", $_GET['kodawari'])) echo("checked") ?> style="-webkit-appearance: radio">
 					<label for="it_web">IT/WEB業界に強い</label>
-					<input type="checkbox" name="kodawari[]" value="foreign_capital" style="-webkit-appearance: radio">
+					<input type="checkbox" name="kodawari[]" value="foreign_capital" <?php if(in_array("foreign_capital", $_GET['kodawari'])) echo("checked") ?>  style="-webkit-appearance: radio">
 					<label for="foreign_capital">外資企業への転職実績◎</label>
 				</p>
 
