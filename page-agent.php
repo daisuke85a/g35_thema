@@ -32,7 +32,7 @@ function getMetaQuery(){
 
 
 	// 年齢の絞り込み
-	switch($_GET['age']){
+	switch($_GET['age']){	
 		case 'none':
 			break;
 		case '20':
@@ -65,6 +65,14 @@ function getMetaQuery(){
 			break;
 		default:
 			break;
+	}
+	// こだわり条件での絞り込み
+	foreach($_GET['kodawari'] as $kodawari){
+		$meta_query[] = [
+			'key'=> 'kodawari',
+			'value'=> '"' . $kodawari . '"',	//Advanced Custom Fields対策。LIKEのあいまい検索で余計なものを見つけないよう""で囲む。
+			'compare' => 'LIKE'
+		];
 	}
 
 	return $meta_query;
@@ -133,6 +141,24 @@ function getMetaQuery(){
 					<input type="radio" name="age" value="40" style="-webkit-appearance: radio">40代
 					<input type="radio" name="age" value="50" style="-webkit-appearance: radio">50代以上
 				</p>
+				<p>こだわり条件を教えて下さい</p>
+				<p>
+					<input type="checkbox" name="kodawari[]" id="support" value="support" checked="checked" style="-webkit-appearance: radio">
+					<label for="support">転職サポートが充実</label>
+					<input type="checkbox" name="kodawari[]" value="woman" style="-webkit-appearance: radio">
+					<label for="woman">女性の転職に強い</label>
+					<input type="checkbox" name="kodawari[]" value="freeter" style="-webkit-appearance: radio">
+					<label for="freeter">フリーターの転職実績◎</label>
+					<input type="checkbox" name="kodawari[]" value="career_up" style="-webkit-appearance: radio">
+					<label for="career_up">キャリアアップに強い</label>
+					<input type="checkbox" name="kodawari[]" value="second_graduates" style="-webkit-appearance: radio">
+					<label for="second_graduates">第二新卒向け</label>
+					<input type="checkbox" name="kodawari[]" value="it_web" style="-webkit-appearance: radio">
+					<label for="it_web">IT/WEB業界に強い</label>
+					<input type="checkbox" name="kodawari[]" value="foreign_capital" style="-webkit-appearance: radio">
+					<label for="foreign_capital">外資企業への転職実績◎</label>
+				</p>
+
 				<input type="submit" value="絞り込み" style="-webkit-appearance: button;border: black 1px solid;">
 			</form>
 		</div>
@@ -154,6 +180,9 @@ function getMetaQuery(){
 					<?php endif; ?>
 					<?php if(get_post_meta($post->ID, 'age',true)): ?>
 						<p class="agent-list__age">年齢：<?php echo get_post_meta($post->ID , 'age' ,true); ?></p>
+					<?php endif; ?>
+					<?php if(get_post_meta($post->ID, 'kodawari',true)): ?>
+						<p class="agent-list__kodawari">こだわり条件：<?php foreach(get_post_meta($post->ID , 'kodawari' ,true) as $kodawari) echo $kodawari . '/'; ?></p>
 					<?php endif; ?>
 				</li>
 				<?php endforeach; endif; ?>
